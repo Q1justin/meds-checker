@@ -1,4 +1,16 @@
-# Getting Started with Create React App
+# Meds Checker
+
+A React-based web application for checking medication information, drug interactions, and safety alerts using FDA data.
+
+## Features
+
+- Search for medications by name
+- View detailed drug information
+- Check drug interactions between multiple medications
+- View safety alerts and warnings
+- Modern Material-UI interface
+
+## Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -68,3 +80,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=======
+# meds-checker
+Search and check different medicines
+>>>>>>> c2ee5701f19ab7507330ef9281de88dd8d17b7dd
