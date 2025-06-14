@@ -12,7 +12,7 @@ import {
   CircularProgress,
   Divider
 } from '@mui/material';
-import fdaApi from '../../../services/fdaApi';
+import fdaApi from '../../services/fdaApi';
 
 const InteractionChecker = () => {
   const [selectedDrugs, setSelectedDrugs] = useState([]);

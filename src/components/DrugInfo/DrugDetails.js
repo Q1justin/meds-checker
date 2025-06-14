@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Card,
@@ -14,7 +14,7 @@ import {
   ListItemText,
   Paper
 } from '@mui/material';
-import fdaApi from '../../../services/fdaApi';
+import fdaApi from '../../services/fdaApi';
 
 const TabPanel = ({ children, value, index }) => (
   <div hidden={value !== index} role="tabpanel">
@@ -42,7 +42,7 @@ const DrugDetails = () => {
     };
 
     fetchDrugDetails();
-  }, [id]);
+  }, []);
 
   if (loading) {
     return (

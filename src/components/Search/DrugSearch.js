@@ -14,10 +14,10 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
-import fdaApi from '../../../services/fdaApi';
+import fdaApi from '../../services/fdaApi';
 
 const DrugSearch = () => {
-  const [query, setQuery] = useState('');
+  const [searchText, setSearchText] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,20 +25,19 @@ const DrugSearch = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    if (!query.trim()) return;
+    if (!searchText.trim()) return;
 
     setLoading(true);
     setError(null);
 
     try {
-      const searchResults = await fdaApi.searchDrugs(query);
+      const searchResults = await fdaApi.searchDrugs(searchText);
       setResults(searchResults);
     } catch (err) {
       setError('Error searching for medications. Please try again.');
       setResults([]);
-    } finally {
-      setLoading(false);
     }
+	setLoading(false);
   };
 
   const handleDrugSelect = (drugId) => {
@@ -56,9 +55,9 @@ const DrugSearch = () => {
           <TextField
             fullWidth
             variant="outlined"
-            placeholder="Enter medication name..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Enter a medicine name..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
           <IconButton 
             type="submit" 
@@ -69,39 +68,43 @@ const DrugSearch = () => {
         </Box>
       </form>
 
-      {loading && (
-        <Box display="flex" justifyContent="center">
-          <CircularProgress />
-        </Box>
-      )}
-
-      {error && (
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error}
-        </Alert>
-      )}
-
-      {results.length > 0 && (
-        <Card>
-          <CardContent>
-            <List>
-              {results.map((drug, index) => (
-                <ListItem
-                  key={index}
-                  button
-                  onClick={() => handleDrugSelect(drug.id)}
-                  divider={index !== results.length - 1}
-                >
-                  <ListItemText
-                    primary={drug.openfda?.brand_name?.[0] || drug.openfda?.generic_name?.[0]}
-                    secondary={drug.openfda?.manufacturer_name?.[0]}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </CardContent>
-        </Card>
-      )}
+	  {
+		loading
+		? (
+			<Box display="flex" justifyContent="center">
+			<CircularProgress />
+			</Box>
+      	)
+		: error
+		? (
+			<Alert severity="error" sx={{ mb: 2 }}>
+			{error}
+			</Alert>
+      	)
+		: results.length > 0
+		? (
+			<Card>
+				<CardContent>
+					<List>
+					{results.map((drug, index) => (
+						<ListItem
+						key={index}
+						button
+						onClick={() => handleDrugSelect(drug.id)}
+						divider={index !== results.length - 1}
+						>
+						<ListItemText
+							primary={drug.openfda?.brand_name?.[0] || drug.openfda?.generic_name?.[0]}
+							secondary={drug.openfda?.manufacturer_name?.[0]}
+						/>
+						</ListItem>
+					))}
+					</List>
+				</CardContent>
+			</Card>
+      	)
+		: <></>
+	  }
     </Box>
   );
 };

@@ -14,7 +14,7 @@ import {
   Collapse
 } from '@mui/material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
-import fdaApi from '../../../services/fdaApi';
+import fdaApi from '../../services/fdaApi';
 
 const SafetyAlerts = () => {
   const [alerts, setAlerts] = useState([]);
