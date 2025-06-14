@@ -12,6 +12,7 @@ const fdaApi = {
           limit: 10
         }
       });
+      console.log(response.data)
       return response.data.results;
     } catch (error) {
       console.error('Error searching drugs:', error);
